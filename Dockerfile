@@ -1,4 +1,4 @@
-FROM openjdk:17 as buildstage
+FROM openjdk:18-alpine as builder
 WORKDIR /app
 
 COPY mvnw .
@@ -6,11 +6,13 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 RUN ./mvnw package
-COPY target/*.jar app.jar
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
 
-FROM openjdk:17
-COPY --from=buildstage /app/app.jar .
-ENTRYPOINT ["java","-jar","app.jar"]
+FROM openjdk:18-alpine
+WORKDIR /app
+EXPOSE 8080
+COPY --from=builder /app/target/*.jar /app/app.jar
 
-
+ENTRYPOINT ["java","-jar","/app/app.jar"]
