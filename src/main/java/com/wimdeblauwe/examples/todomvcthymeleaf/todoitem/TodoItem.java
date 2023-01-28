@@ -20,8 +20,7 @@ public class TodoItem {
 
     }
 
-    public TodoItem(String title,
-                    boolean completed) {
+    public TodoItem(String title, boolean completed) {
         this.title = title;
         this.completed = completed;
     }
