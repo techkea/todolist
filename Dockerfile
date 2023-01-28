@@ -1,18 +1,18 @@
 FROM openjdk:18-alpine as builder
-WORKDIR /app
+#WORKDIR /app
 
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 RUN ./mvnw package
-ARG JAR_FILE=/app/target/*.jar
-COPY ${JAR_FILE} app.jar
+#ARG JAR_FILE=/app/target/*.jar
+#COPY ${JAR_FILE} app.jar
 
 
 FROM openjdk:18-alpine
-WORKDIR /app
+#WORKDIR /app
 EXPOSE 8080
-COPY --from=builder /app/target/*.jar /app/app.jar
+COPY --from=builder /target/*.jar app.jar
 
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
