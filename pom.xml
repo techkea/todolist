@@ -45,8 +45,9 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.43</version>
-		</dependency><!-- webjars -->
+		</dependency>
 
+		<!-- webjars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>webjars-locator</artifactId>
